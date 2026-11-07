@@ -1,0 +1,747 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Freenzy</title>
+  <meta name="description" content="Freenzy Digital EPK. Dark Underground Electronic Music.">
+
+  <!-- Open Graph / Social Media Meta Tags -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Freenzy | The Artist">
+  <meta property="og:description" content="Freenzy Digital EPK. Dark Underground Electronic Music.">
+  <meta property="og:image" content="assets/profile.webp">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="assets/Freenzy%20White.svg">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Oswald:wght@400;600;700&display=swap"
+    rel="stylesheet">
+  <!-- Tailwind CSS v4 CDN -->
+  <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+  <style type="text/tailwindcss">
+    @theme {
+      --font-heading: "Oswald", sans-serif;
+      --font-body: "Inter", sans-serif;
+      --color-primary: #09090B;
+      --color-surface: #18181B;
+      --color-text-main: #F8FAFC;
+    }
+    
+    @keyframes marquee {
+      0% { transform: translate3d(0, 0, 0); }
+      100% { transform: translate3d(-50%, 0, 0); }
+    }
+    .animate-marquee {
+      animation: marquee 120s linear infinite;
+      will-change: transform;
+    }
+    .animate-text-marquee {
+      animation: marquee 60s linear infinite;
+      will-change: transform;
+    }
+    .animate-text-marquee-reverse {
+      animation: marquee 60s linear infinite reverse;
+      will-change: transform;
+    }
+    
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background-color: var(--color-primary);
+      color: var(--color-text-main);
+      font-family: var(--font-body);
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+      font-family: var(--font-heading);
+      letter-spacing: 0.05em;
+    }
+  </style>
+</head>
+
+<body class="antialiased selection:bg-highlight selection:text-white relative">
+  <!-- Scroll Progress Bar -->
+  <div id="scroll-progress" class="fixed top-0 left-0 h-[2px] bg-[#e11d48] z-[100] w-0 transition-all duration-75"></div>
+
+  <!-- Hero Section -->
+  <header class="relative h-screen w-full overflow-hidden flex flex-col items-center justify-center">
+    <!-- Fundo de vídeo -->
+    <video autoplay loop muted playsinline class="absolute top-0 left-0 w-full h-full object-cover z-0">
+      <source src="assets/hero2.webm" type="video/webm">
+      <source src="assets/hero2.mp4" type="video/mp4">
+    </video>
+    <!-- Overlay Escuro (#09090B com opacidade) -->
+    <div class="absolute inset-0 bg-primary/70 z-10"></div>
+
+    <!-- Lightbox Overlay -->
+    <div id="lightbox" class="fixed inset-0 z-[200] bg-black/95 opacity-0 pointer-events-none transition-opacity duration-300 flex flex-col items-center justify-center p-4 md:p-12">
+      <button onclick="closeLightbox()" class="absolute top-6 right-6 md:top-10 md:right-10 text-white/50 hover:text-white transition-colors duration-300">
+        <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6 18L18 6M6 6l12 12"></path></svg>
+      </button>
+      <img id="lightbox-img" src="" class="max-h-[80vh] max-w-full object-contain mb-8 rounded-lg shadow-2xl scale-95 transition-transform duration-500">
+      <a id="lightbox-download" href="" download="Freenzy_Official_Asset" class="px-8 py-4 bg-[#e11d48] text-white font-heading uppercase tracking-[0.2em] font-semibold text-xs md:text-sm hover:bg-white hover:text-black transition-colors duration-300 flex items-center justify-center gap-3">
+        <svg class="w-5 h-5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+        Download High-Res
+      </a>
+    </div>
+
+    <!-- Initialization Scripts -->
+    <script>
+      // Lightbox Logic
+      window.openLightbox = function(src) {
+        const lb = document.getElementById('lightbox');
+        const img = document.getElementById('lightbox-img');
+        const dl = document.getElementById('lightbox-download');
+        
+        img.src = src;
+        dl.href = src;
+        
+        lb.classList.remove('opacity-0', 'pointer-events-none');
+        setTimeout(() => img.classList.remove('scale-95'), 50);
+      };
+
+      window.closeLightbox = function() {
+        const lb = document.getElementById('lightbox');
+        const img = document.getElementById('lightbox-img');
+        
+        img.classList.add('scale-95');
+        lb.classList.add('opacity-0', 'pointer-events-none');
+      };
+
+      // Change Youtube Video Functionality
+    </script>
+
+    <!-- Navigation Menu -->
+    <nav class="absolute top-8 w-full px-6 z-30 flex justify-center notranslate" translate="no">
+      <div
+        class="flex flex-wrap justify-center gap-6 md:gap-12 text-white/70 font-heading tracking-widest text-sm md:text-base uppercase bg-black/30 backdrop-blur-md px-8 py-4 rounded-2xl md:rounded-full border border-white/10 shadow-lg">
+        <a href="#bio" class="hover:text-highlight transition-colors duration-300 font-semibold drop-shadow-md">Bio</a>
+        <a href="#tracks"
+          class="hover:text-highlight transition-colors duration-300 font-semibold drop-shadow-md">Tracks</a>
+        <a href="#live-experience"
+          class="hover:text-highlight transition-colors duration-300 font-semibold drop-shadow-md">Live Experience</a>
+        <a href="#contact"
+          class="hover:text-highlight transition-colors duration-300 font-semibold drop-shadow-md">Contacts</a>
+      </div>
+    </nav>
+
+    <!-- Logo Centralizada -->
+    <div class="relative z-20 text-center px-4 mt-20">
+      <img src="assets/Freenzy%20White.svg" alt="Freenzy Logo"
+        class="w-64 md:w-96 drop-shadow-[0_0_30px_rgba(255,255,255,0.1)] opacity-90 mx-auto hover:opacity-100 hover:scale-105 transition-all duration-700">
+    </div>
+
+    <!-- Botão Scroll Down -->
+    <a href="#grid"
+      class="absolute bottom-12 z-20 animate-bounce flex flex-col items-center opacity-70 hover:opacity-100 transition-opacity">
+      <svg class="w-8 h-8 text-highlight" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+        xmlns="http://www.w3.org/2000/svg">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+      </svg>
+    </a>
+  </header>
+
+  <!-- Photo Grid (Marquee) -->
+  <section id="grid" class="w-full bg-primary relative z-20 shadow-2xl py-1 overflow-hidden border-y border-white/5">
+    <div class="flex whitespace-nowrap animate-marquee items-center gap-1 w-max">
+      <!-- Original Set -->
+      <img src="assets/no entry/grid-1_compressed.webp" alt="Live Photo"
+        class="h-64 md:h-[22rem] aspect-square md:aspect-video object-cover grayscale hover:grayscale-0 transition-all duration-500">
+      <img src="assets/no entry/grid-2_compressed.webp" alt="Live Photo"
+        class="h-64 md:h-[22rem] aspect-square md:aspect-video object-cover grayscale hover:grayscale-0 transition-all duration-500">
+      <img src="assets/no entry/grid-3_compressed.webp" alt="Live Photo"
+        class="h-64 md:h-[22rem] aspect-square md:aspect-video object-cover grayscale hover:grayscale-0 transition-all duration-500">
+      <img src="assets/no entry/grid-4_compressed.webp" alt="Live Photo"
+        class="h-64 md:h-[22rem] aspect-square md:aspect-video object-cover grayscale hover:grayscale-0 transition-all duration-500">
+      <img src="assets/no entry/grid-5_compressed.webp" alt="Live Photo"
+        class="h-64 md:h-[22rem] aspect-square md:aspect-video object-cover grayscale hover:grayscale-0 transition-all duration-500">
+      <img src="assets/no entry/grid-6_compressed.webp" alt="Live Photo"
+        class="h-64 md:h-[22rem] aspect-square md:aspect-video object-cover grayscale hover:grayscale-0 transition-all duration-500">
+      <img src="assets/no entry/IG_@LAGH.FOTO-05445_compressed.webp" alt="Live Photo"
+        class="h-64 md:h-[22rem] aspect-square md:aspect-video object-cover grayscale hover:grayscale-0 transition-all duration-500">
+      <img src="assets/no entry/IG_@LAGH.FOTO-05467_compressed.webp" alt="Live Photo"
+        class="h-64 md:h-[22rem] aspect-square md:aspect-video object-cover grayscale hover:grayscale-0 transition-all duration-500">
+      <img src="assets/no entry/IMG_0422_compressed.webp" alt="Live Photo"
+        class="h-64 md:h-[22rem] aspect-square md:aspect-video object-cover grayscale hover:grayscale-0 transition-all duration-500">
+      <!-- Extending Original Set to guarantee screen overflow -->
+      <img src="assets/no entry/grid-1_compressed.webp" alt="Live Photo"
+        class="h-64 md:h-[22rem] aspect-square md:aspect-video object-cover grayscale hover:grayscale-0 transition-all duration-500">
+      <img src="assets/no entry/grid-2_compressed.webp" alt="Live Photo"
+        class="h-64 md:h-[22rem] aspect-square md:aspect-video object-cover grayscale hover:grayscale-0 transition-all duration-500">
+      <img src="assets/no entry/grid-3_compressed.webp" alt="Live Photo"
+        class="h-64 md:h-[22rem] aspect-square md:aspect-video object-cover grayscale hover:grayscale-0 transition-all duration-500">
+
+      <!-- Duplicate Set for Perfect Loop (-50% transform exact) -->
+      <img src="assets/no entry/grid-1_compressed.webp" alt="Live Photo"
+        class="h-64 md:h-[22rem] aspect-square md:aspect-video object-cover grayscale hover:grayscale-0 transition-all duration-500">
+      <img src="assets/no entry/grid-2_compressed.webp" alt="Live Photo"
+        class="h-64 md:h-[22rem] aspect-square md:aspect-video object-cover grayscale hover:grayscale-0 transition-all duration-500">
+      <img src="assets/no entry/grid-3_compressed.webp" alt="Live Photo"
+        class="h-64 md:h-[22rem] aspect-square md:aspect-video object-cover grayscale hover:grayscale-0 transition-all duration-500">
+      <img src="assets/no entry/grid-4_compressed.webp" alt="Live Photo"
+        class="h-64 md:h-[22rem] aspect-square md:aspect-video object-cover grayscale hover:grayscale-0 transition-all duration-500">
+      <img src="assets/no entry/grid-5_compressed.webp" alt="Live Photo"
+        class="h-64 md:h-[22rem] aspect-square md:aspect-video object-cover grayscale hover:grayscale-0 transition-all duration-500">
+      <img src="assets/no entry/grid-6_compressed.webp" alt="Live Photo"
+        class="h-64 md:h-[22rem] aspect-square md:aspect-video object-cover grayscale hover:grayscale-0 transition-all duration-500">
+      <img src="assets/no entry/IG_@LAGH.FOTO-05445_compressed.webp" alt="Live Photo"
+        class="h-64 md:h-[22rem] aspect-square md:aspect-video object-cover grayscale hover:grayscale-0 transition-all duration-500">
+      <img src="assets/no entry/IG_@LAGH.FOTO-05467_compressed.webp" alt="Live Photo"
+        class="h-64 md:h-[22rem] aspect-square md:aspect-video object-cover grayscale hover:grayscale-0 transition-all duration-500">
+      <img src="assets/no entry/IMG_0422_compressed.webp" alt="Live Photo"
+        class="h-64 md:h-[22rem] aspect-square md:aspect-video object-cover grayscale hover:grayscale-0 transition-all duration-500">
+      <img src="assets/no entry/grid-1_compressed.webp" alt="Live Photo"
+        class="h-64 md:h-[22rem] aspect-square md:aspect-video object-cover grayscale hover:grayscale-0 transition-all duration-500">
+      <img src="assets/no entry/grid-2_compressed.webp" alt="Live Photo"
+        class="h-64 md:h-[22rem] aspect-square md:aspect-video object-cover grayscale hover:grayscale-0 transition-all duration-500">
+      <img src="assets/no entry/grid-3_compressed.webp" alt="Live Photo"
+        class="h-64 md:h-[22rem] aspect-square md:aspect-video object-cover grayscale hover:grayscale-0 transition-all duration-500">
+    </div>
+  </section>
+
+
+  <!-- Bio Section -->
+  <section id="bio"
+    class="max-w-7xl mx-auto px-6 py-24 md:py-32 grid grid-cols-1 md:grid-cols-2 gap-16 md:gap-24 items-stretch">
+    <!-- Coluna Esquerda: Imagem -->
+    <div class="relative group w-full max-w-sm mx-auto md:max-w-none md:mx-0 h-full">
+      <!-- Glow effect under the image -->
+      <div class="absolute -inset-1 bg-highlight blur opacity-20 transition duration-1000"></div>
+      <img src="assets/profile.webp" loading="lazy" alt="Freenzy Profile"
+        class="relative w-full h-full object-cover border border-white/5 shadow-2xl transition-all duration-700">
+    </div>
+
+    <!-- Coluna Direita: Texto e Botões -->
+    <div class="flex flex-col space-y-8 justify-between h-full">
+
+      <div>
+        <h1
+          class="text-5xl md:text-7xl font-bold uppercase tracking-wider text-transparent bg-clip-text bg-gradient-to-r from-text-main via-zinc-300 to-zinc-600">
+          The Artist</h1>
+        <div
+          class="text-zinc-400 font-light leading-relaxed text-lg md:text-xl text-left md:text-justify pr-0 md:pr-12 mt-8">
+          <p>
+            Freenzy é o projeto do produtor brasileiro Daniel, nascido em Curitiba, que combina intensidade, groove e
+            paixão em uma identidade musical autêntica. Com o apoio de artistas como Jamie Jones, ANOTR, The Martinez
+            Brothers e Carl Cox, e lançamentos por selos como Solid Grooves e Elrow Music, destaca-se por seu estilo
+            envolvente e influências latinas. Após uma marcante tour europeia em 2025, com apresentações em clubes como
+            UNVRS, Le Vele, Tantra, Marmarela e Oasis Gran Canaria, Freenzy segue expandindo seu impacto na América
+            Latina, consolidando-se como uma das forças mais promissoras da cena eletrônica contemporânea.
+          </p>
+        </div>
+      </div>
+
+      <!-- Supporter Marquee -->
+      <div
+        class="w-full flex items-stretch border-y border-white/5 relative bg-primary/20 backdrop-blur-sm overflow-hidden my-4 notranslate"
+        translate="no">
+        <!-- Parte Fixa -->
+        <div
+          class="px-4 md:px-6 py-3 md:py-4 z-20 bg-primary shadow-[15px_0_20px_rgba(9,9,11,1)] text-zinc-100 font-heading uppercase tracking-[0.2em] text-sm font-bold shrink-0 border-r border-white/5 flex items-center">
+          SUPP BY:
+        </div>
+
+        <!-- Parte Animada -->
+        <div class="flex-1 overflow-hidden relative flex py-3 md:py-4">
+          <!-- Fade na direita -->
+          <div
+            class="absolute top-0 right-0 w-12 h-full bg-gradient-to-l from-primary to-transparent z-10 pointer-events-none">
+          </div>
+
+          <div
+            class="flex whitespace-nowrap animate-text-marquee items-center gap-8 w-max text-zinc-500 font-heading uppercase tracking-[0.2em] text-sm px-4">
+            <span>Jamie Jones &bull; ANOTR &bull; The Martinez Brothers &bull; Carl Cox &bull; Michael Bibi &bull; Marco
+              Carola &bull; Joseph Capriati &bull; Dennis Cruz &bull; Cloonee &bull; Toman &bull; Chris Lake &bull;
+              SOLARDO</span>
+            <span>Jamie Jones &bull; ANOTR &bull; The Martinez Brothers &bull; Carl Cox &bull; Michael Bibi &bull; Marco
+              Carola &bull; Joseph Capriati &bull; Dennis Cruz &bull; Cloonee &bull; Toman &bull; Chris Lake &bull;
+              SOLARDO</span>
+            <span>Jamie Jones &bull; ANOTR &bull; The Martinez Brothers &bull; Carl Cox &bull; Michael Bibi &bull; Marco
+              Carola &bull; Joseph Capriati &bull; Dennis Cruz &bull; Cloonee &bull; Toman &bull; Chris Lake &bull;
+              SOLARDO</span>
+            <span>Jamie Jones &bull; ANOTR &bull; The Martinez Brothers &bull; Carl Cox &bull; Michael Bibi &bull; Marco
+              Carola &bull; Joseph Capriati &bull; Dennis Cruz &bull; Cloonee &bull; Toman &bull; Chris Lake &bull;
+              SOLARDO</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Labels Marquee -->
+      <div class="w-full flex items-stretch border-b border-white/5 relative bg-primary/20 backdrop-blur-sm overflow-hidden mb-8 notranslate" translate="no">
+        <div class="px-4 md:px-6 py-3 md:py-4 z-20 bg-primary shadow-[15px_0_20px_rgba(9,9,11,1)] text-zinc-100 font-heading uppercase tracking-[0.2em] text-sm font-bold shrink-0 border-r border-white/5 flex items-center">
+          LABELS:
+        </div>
+        <div class="flex-1 overflow-hidden relative flex py-3 md:py-4">
+          <div class="absolute top-0 right-0 w-12 h-full bg-gradient-to-l from-primary to-transparent z-10 pointer-events-none"></div>
+          <div class="flex whitespace-nowrap animate-text-marquee items-center gap-8 w-max text-zinc-500 font-heading uppercase tracking-[0.2em] text-sm px-4">
+            <span>SOLID GROOVES | REPOPULATE MARS | ELROW MUSIC | REVIVAL NEW YORK | HOT CREATIONS | LA PERA RECORDS | DEEPERFECT | HELLBENT | NERVOUS</span>
+            <span>SOLID GROOVES | REPOPULATE MARS | ELROW MUSIC | REVIVAL NEW YORK | HOT CREATIONS | LA PERA RECORDS | DEEPERFECT | HELLBENT | NERVOUS</span>
+            <span>SOLID GROOVES | REPOPULATE MARS | ELROW MUSIC | REVIVAL NEW YORK | HOT CREATIONS | LA PERA RECORDS | DEEPERFECT | HELLBENT | NERVOUS</span>
+            <span>SOLID GROOVES | REPOPULATE MARS | ELROW MUSIC | REVIVAL NEW YORK | HOT CREATIONS | LA PERA RECORDS | DEEPERFECT | HELLBENT | NERVOUS</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Botões (CTA) -->
+      <div class="flex flex-col space-y-4 w-full">
+        <!-- Contact Dropdown -->
+        <div class="w-full">
+          <button onclick="document.getElementById('contact-dropdown').classList.toggle('hidden')"
+            class="group relative px-8 py-4 bg-highlight text-white text-center font-heading uppercase tracking-[0.2em] font-semibold overflow-hidden transition-all duration-300 shadow-[0_0_15px_rgba(225,29,72,0.3)] hover:shadow-[0_0_30px_rgba(225,29,72,0.6)] w-full flex items-center justify-center gap-2">
+            <span class="relative z-10 flex items-center">Contact Me</span>
+            <svg class="w-4 h-4 relative z-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+            </svg>
+            <div
+              class="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out">
+            </div>
+          </button>
+
+          <div id="contact-dropdown" class="hidden flex flex-col space-y-2 mt-2">
+            <a href="https://api.whatsapp.com/send/?phone=%2B34614287694&text&type=phone_number&app_absent=0"
+              target="_blank"
+              class="px-8 py-3 bg-surface/50 border border-white/5 text-zinc-300 text-center font-heading uppercase tracking-[0.2em] text-sm hover:border-highlight hover:text-highlight transition-colors duration-300">Contato
+              (BR)</a>
+            <a href="https://api.whatsapp.com/send/?phone=34614287694&text=Hi%2C+I+saw+your+presskit+and+would+like+more+information.&type=phone_number&app_absent=0"
+              target="_blank"
+              class="px-8 py-3 bg-surface/50 border border-white/5 text-zinc-300 text-center font-heading uppercase tracking-[0.2em] text-sm hover:border-highlight hover:text-highlight transition-colors duration-300">Contato
+              (LATAM)</a>
+            <a href="https://api.whatsapp.com/send/?phone=393458858046&text=Hi%2C+I+saw+your+presskit+and+would+like+more+information.&type=phone_number&app_absent=0"
+              target="_blank"
+              class="px-8 py-3 bg-surface/50 border border-white/5 text-zinc-300 text-center font-heading uppercase tracking-[0.2em] text-sm hover:border-highlight hover:text-highlight transition-colors duration-300">Contact
+              (EUROPE)</a>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 w-full">
+          <a href="https://drive.google.com/drive/folders/1bu86aGxa0-tHD95kO4v45NjnurRRXoce" target="_blank"
+            class="px-6 py-2.5 md:py-3 bg-zinc-800 text-white text-center font-heading uppercase tracking-[0.2em] text-xs font-semibold hover:bg-zinc-700 transition-all duration-300">
+            DOWNLOAD PRESSKIT
+          </a>
+          <a href="assets/Technical%20Rider%20%26%20Hospitality.pdf" target="_blank"
+            class="px-6 py-2.5 md:py-3 border border-zinc-700 text-zinc-300 text-center font-heading uppercase tracking-[0.2em] text-xs font-medium hover:border-zinc-500 hover:text-white bg-primary/30 transition-colors duration-300">
+            DOWNLOAD TECH RIDER
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Power Stats Section (Moved) -->
+  <section class="border-y border-zinc-800 bg-primary/20 backdrop-blur-sm px-6 py-12 md:py-16 mt-8 md:mt-16 mb-24 md:mb-32 relative z-20">
+    <div class="max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-y-12 text-center md:divide-x divide-zinc-800">
+      <div class="flex flex-col items-center justify-center space-y-3">
+        <span class="text-xs text-zinc-300 font-semibold font-sans tracking-[0.2em] uppercase">Monthly Listeners</span>
+        <span class="text-6xl md:text-7xl font-heading font-black text-white tracking-wider"><span class="text-[#e11d48]">+</span>220K</span>
+      </div>
+      <div class="flex flex-col items-center justify-center space-y-3 border-l border-zinc-800 md:border-none">
+        <span class="text-xs text-zinc-300 font-semibold font-sans tracking-[0.2em] uppercase">Total Streams</span>
+        <span class="text-6xl md:text-7xl font-heading font-black text-white tracking-wider"><span class="text-[#e11d48]">+</span>18M</span>
+      </div>
+      <div class="flex flex-col items-center justify-center space-y-3 border-t border-zinc-800 pt-10 md:border-none md:pt-0">
+        <span class="text-xs text-zinc-300 font-semibold font-sans tracking-[0.2em] uppercase max-w-[160px]">Overall Top 100 Releases</span>
+        <span class="text-6xl md:text-7xl font-heading font-black text-white tracking-wider"><span class="text-[#e11d48]">#</span>1</span>
+      </div>
+      <div class="flex flex-col items-center justify-center space-y-3 border-l border-t border-zinc-800 pt-10 md:border-none md:pt-0">
+        <span class="text-xs text-zinc-300 font-semibold font-sans tracking-[0.2em] uppercase max-w-[160px]">Top 1 Tech House</span>
+        <span class="text-6xl md:text-7xl font-heading font-black text-white tracking-wider"><span class="text-[#e11d48]">#</span>1</span>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- Tracks Section -->
+  <section id="tracks" class="py-24 border-y border-white/5 relative overflow-hidden">
+    <!-- Fundo de vídeo -->
+    <video autoplay loop muted playsinline class="absolute top-0 left-0 w-full h-full object-cover z-0">
+      <source src="assets/hero.webm" type="video/webm">
+      <source src="assets/hero.mp4" type="video/mp4">
+    </video>
+    <!-- Overlay Escuro -->
+    <div class="absolute inset-0 bg-primary/80 z-10"></div>
+
+    <div class="max-w-5xl mx-auto px-6 relative z-30">
+      <h2
+        class="text-3xl font-heading uppercase mb-12 text-center tracking-[0.2em] text-white drop-shadow-xl font-semibold">
+        Tracks</h2>
+
+      <div
+        class="w-full rounded-xl overflow-hidden shadow-2xl border border-white/10 flex items-center justify-center bg-transparent backdrop-blur-sm">
+        <iframe style="border-radius:12px"
+          src="https://open.spotify.com/embed/artist/70BgO4a6LVEzYiAgxubE3q?utm_source=generator&theme=0" width="100%"
+          height="552" frameBorder="0" allowfullscreen=""
+          allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+      </div>
+    </div>
+  </section>
+
+  <!-- Live Section -->
+  <section id="live-experience" class="py-24 md:py-32 relative overflow-hidden">
+    <!-- Abstract background glow -->
+    <div
+      class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-highlight/10 rounded-full blur-[100px] pointer-events-none z-0">
+    </div>
+
+    <div class="max-w-5xl mx-auto px-6 flex flex-col items-center relative z-10">
+      <h2
+        class="text-3xl font-heading uppercase mb-12 text-center tracking-[0.2em] text-white drop-shadow-xl font-semibold">
+        Live Experience</h2>
+
+      <!-- Video Container MAX-W-5XL mx-auto and Shadow outer red -->
+      <div
+        class="w-full aspect-video rounded-sm overflow-hidden shadow-[0_0_60px_rgba(225,29,72,0.25)] border border-highlight/20 relative group bg-primary mb-6">
+        <iframe id="main-video-player" class="w-full h-full object-cover relative z-10 transition-opacity duration-300"
+          src="https://www.youtube.com/embed/6Xki7520Rog?rel=0" title="YouTube video player" frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+      </div>
+
+      <!-- Thumbnail Carousel -->
+      <style>
+        .no-scrollbar::-webkit-scrollbar {
+          display: none;
+        }
+
+        .no-scrollbar {
+          -ms-overflow-style: none;
+          scrollbar-width: none;
+        }
+      </style>
+      <div
+        class="w-full overflow-x-auto flex md:grid md:grid-cols-3 gap-3 md:gap-4 pb-4 snap-x no-scrollbar items-center">
+        <button onclick="changeYTVideo('6Xki7520Rog', this)"
+          class="yt-thumb group/btn flex-shrink-0 w-[240px] md:w-full aspect-video rounded-sm overflow-hidden border border-highlight shadow-[0_0_15px_rgba(225,29,72,0.3)] opacity-100 grayscale-0 transition-all snap-start cursor-pointer hover:border-highlight focus:outline-none relative">
+          <img src="https://img.youtube.com/vi/6Xki7520Rog/hqdefault.jpg"
+            class="w-full h-full object-cover scale-[1.35] pointer-events-none">
+          <div
+            class="absolute inset-0 bg-gradient-to-t from-black/90 to-black/20 group-hover/btn:to-black/0 transition-colors flex flex-col justify-end p-3 pointer-events-none">
+            <span
+              class="text-[10px] md:text-sm font-heading font-bold uppercase tracking-[0.05em] text-white text-left truncate w-full drop-shadow-md">Freenzy
+              @ Harvibal | Cali-CO</span>
+          </div>
+          <div
+            class="play-icon absolute inset-0 flex items-center justify-center opacity-100 transition-opacity pointer-events-none">
+            <div
+              class="w-10 h-10 bg-highlight/80 rounded-full flex items-center justify-center backdrop-blur-sm border border-highlight shadow-[0_0_10px_rgba(225,29,72,0.6)]">
+              <svg class="w-5 h-5 text-white ml-0.5" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M8 5v14l11-7z" />
+              </svg>
+            </div>
+          </div>
+        </button>
+
+        <button onclick="changeYTVideo('Ousvg2e-X8A', this)"
+          class="yt-thumb group/btn flex-shrink-0 w-[240px] md:w-full aspect-video rounded-sm overflow-hidden border border-white/10 opacity-50 grayscale hover:grayscale-0 hover:opacity-100 transition-all snap-start cursor-pointer focus:outline-none relative">
+          <img src="https://img.youtube.com/vi/Ousvg2e-X8A/hqdefault.jpg"
+            class="w-full h-full object-cover scale-[1.35] pointer-events-none">
+          <div
+            class="absolute inset-0 bg-gradient-to-t from-black/90 to-black/20 group-hover/btn:to-black/0 transition-colors flex flex-col justify-end p-3 pointer-events-none">
+            <span
+              class="text-[10px] md:text-sm font-heading font-bold uppercase tracking-[0.05em] text-white text-left truncate w-full drop-shadow-md">Freenzy
+              @ Milvidas | B.A-AR</span>
+          </div>
+          <div
+            class="play-icon absolute inset-0 flex items-center justify-center opacity-0 transition-opacity pointer-events-none">
+            <div
+              class="w-10 h-10 bg-highlight/80 rounded-full flex items-center justify-center backdrop-blur-sm border border-highlight shadow-[0_0_10px_rgba(225,29,72,0.6)]">
+              <svg class="w-5 h-5 text-white ml-0.5" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M8 5v14l11-7z" />
+              </svg>
+            </div>
+          </div>
+        </button>
+
+        <button onclick="changeYTVideo('neAe3gou2So', this)"
+          class="yt-thumb group/btn flex-shrink-0 w-[240px] md:w-full aspect-video rounded-sm overflow-hidden border border-white/10 opacity-50 grayscale hover:grayscale-0 hover:opacity-100 transition-all snap-start cursor-pointer focus:outline-none relative">
+          <img src="https://img.youtube.com/vi/neAe3gou2So/hqdefault.jpg"
+            class="w-full h-full object-cover scale-[1.35] pointer-events-none">
+          <div
+            class="absolute inset-0 bg-gradient-to-t from-black/90 to-black/20 group-hover/btn:to-black/0 transition-colors flex flex-col justify-end p-3 pointer-events-none">
+            <span
+              class="text-[10px] md:text-sm font-heading font-bold uppercase tracking-[0.05em] text-white text-left truncate w-full drop-shadow-md">Freenzy
+              @ Fabrik | Mad-ES</span>
+          </div>
+          <div
+            class="play-icon absolute inset-0 flex items-center justify-center opacity-0 transition-opacity pointer-events-none">
+            <div
+              class="w-10 h-10 bg-highlight/80 rounded-full flex items-center justify-center backdrop-blur-sm border border-highlight shadow-[0_0_10px_rgba(225,29,72,0.6)]">
+              <svg class="w-5 h-5 text-white ml-0.5" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M8 5v14l11-7z" />
+              </svg>
+            </div>
+          </div>
+        </button>
+      </div>
+
+      <script>
+        function changeYTVideo(videoId, el) {
+          document.getElementById('main-video-player').src = "https://www.youtube.com/embed/" + videoId + "?autoplay=1&rel=0";
+          const thumbs = document.querySelectorAll('.yt-thumb');
+          thumbs.forEach(t => {
+            t.classList.remove('border-highlight', 'opacity-100', 'grayscale-0', 'shadow-[0_0_15px_rgba(225,29,72,0.3)]');
+            t.classList.add('border-white/10', 'opacity-50', 'grayscale');
+            const playIcon = t.querySelector('.play-icon');
+            if (playIcon) playIcon.classList.replace('opacity-100', 'opacity-0');
+          });
+          el.classList.remove('border-white/10', 'opacity-50', 'grayscale');
+          el.classList.add('border-highlight', 'opacity-100', 'grayscale-0', 'shadow-[0_0_15px_rgba(225,29,72,0.3)]');
+          const pl = el.querySelector('.play-icon');
+          if (pl) pl.classList.replace('opacity-0', 'opacity-100');
+        }
+      </script>
+    </div>
+  </section>
+
+  <!-- Social Footer -->
+  <footer id="contact" class="bg-primary/50 backdrop-blur-xl border-t border-white/5 relative z-10">
+    <div class="max-w-7xl mx-auto px-6 py-16 md:py-20 flex flex-col items-center">
+      <h2
+        class="flex items-center justify-center w-full mb-16 text-3xl font-heading uppercase tracking-[0.2em] text-white drop-shadow-xl font-semibold">
+        <span class="flex-1 text-right">CONTACT</span>
+        <span class="mx-3 md:mx-4 text-center">&</span>
+        <span class="flex-1 text-left">FOLLOW</span>
+      </h2>
+
+      <!-- Social Links Row -->
+      <div class="flex flex-nowrap gap-2 md:gap-6 justify-center items-start w-full mx-auto px-2">
+        <!-- Instagram -->
+        <a href="https://www.instagram.com/freenzymusic/" target="_blank"
+          class="w-16 md:w-28 flex-shrink-0 group flex flex-col items-center gap-2 md:gap-3 transition-transform hover:-translate-y-2 text-center">
+          <div
+            class="w-14 h-14 md:w-16 md:h-16 rounded-full border border-white/10 bg-surface/50 backdrop-blur-md flex items-center justify-center shadow-lg group-hover:border-[#E1306C] group-hover:shadow-[0_0_30px_rgba(225,48,108,0.4)] transition-all duration-300">
+            <svg class="w-7 h-7 md:w-8 md:h-8 text-zinc-400 transition-colors duration-300" viewBox="0 0 24 24">
+              <defs>
+                <linearGradient id="ig-grad" x1="0%" y1="100%" x2="100%" y2="0%">
+                  <stop offset="0%" stop-color="#f9ce34" />
+                  <stop offset="50%" stop-color="#ee2a7b" />
+                  <stop offset="100%" stop-color="#6228d7" />
+                </linearGradient>
+              </defs>
+              <path class="fill-current group-hover:fill-[url(#ig-grad)] transition-all duration-300"
+                d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.20 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z" />
+            </svg>
+          </div>
+          <span
+            class="font-heading uppercase tracking-[0.3em] text-[10px] md:text-xs font-bold text-zinc-400 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-tr group-hover:from-[#f9ce34] group-hover:via-[#ee2a7b] group-hover:to-[#6228d7] transition-all duration-300">Instagram</span>
+        </a>
+
+        <!-- SoundCloud -->
+        <a href="https://soundcloud.com/freenzymusic" target="_blank"
+          class="w-16 md:w-28 flex-shrink-0 group flex flex-col items-center gap-2 md:gap-3 transition-transform hover:-translate-y-2 text-center">
+          <div
+            class="w-14 h-14 md:w-16 md:h-16 rounded-full border border-white/10 bg-surface/50 backdrop-blur-md flex items-center justify-center shadow-lg group-hover:border-[currentColor] group-hover:text-[#FF5500] group-hover:shadow-[0_0_30px_rgba(255,85,0,0.4)] transition-all duration-300">
+            <svg
+              class="w-9 md:w-11 h-auto text-zinc-400 group-hover:text-[currentColor] transition-colors duration-300 translate-y-0.5"
+              fill="currentColor" viewBox="-271 345.8 256 111.2">
+              <path
+                d="M-238.4,398.1c-0.8,0-1.4,0.6-1.5,1.5l-2.3,28l2.3,27.1c0.1,0.8,0.7,1.5,1.5,1.5c0.8,0,1.4-0.6,1.5-1.5l2.6-27.1l-2.6-28C-237,398.7-237.7,398.1-238.4,398.1z" />
+              <path
+                d="M-228.2,399.9c-0.9,0-1.7,0.7-1.7,1.7l-2.1,26l2.1,27.3c0.1,1,0.8,1.7,1.7,1.7c0.9,0,1.6-0.7,1.7-1.7l2.4-27.3l-2.4-26C-226.6,400.6-227.3,399.9-228.2,399.9z" />
+              <path
+                d="M-258.6,403.5c-0.5,0-1,0.4-1.1,1l-2.5,23l2.5,22.5c0.1,0.6,0.5,1,1.1,1c0.5,0,1-0.4,1.1-1l2.9-22.5l-2.9-23C-257.7,404-258.1,403.5-258.6,403.5z" />
+              <path
+                d="M-268.1,412.3c-0.5,0-1,0.4-1,1l-1.9,14.3l1.9,14c0.1,0.6,0.5,1,1,1s0.9-0.4,1-1l2.2-14l-2.2-14.2C-267.2,412.8-267.6,412.3-268.1,412.3z" />
+              <path
+                d="M-207.5,373.5c-1.2,0-2.1,0.9-2.2,2.1l-1.9,52l1.9,27.2c0.1,1.2,1,2.1,2.2,2.1s2.1-0.9,2.2-2.1l2.1-27.2l-2.1-52C-205.4,374.4-206.4,373.5-207.5,373.5z" />
+              <path
+                d="M-248.6,399c-0.7,0-1.2,0.5-1.3,1.3l-2.4,27.3l2.4,26.3c0.1,0.7,0.6,1.3,1.3,1.3c0.7,0,1.2-0.5,1.3-1.2l2.7-26.3l-2.7-27.3C-247.4,399.6-247.9,399-248.6,399z" />
+              <path
+                d="M-217.9,383.4c-1,0-1.9,0.8-1.9,1.9l-2,42.3l2,27.3c0.1,1.1,0.9,1.9,1.9,1.9s1.9-0.8,1.9-1.9l2.3-27.3l-2.3-42.3C-216,384.2-216.9,383.4-217.9,383.4z" />
+              <path
+                d="M-154.4,359.3c-1.8,0-3.2,1.4-3.2,3.2l-1.2,65l1.2,26.1c0,1.8,1.5,3.2,3.2,3.2c1.8,0,3.2-1.5,3.2-3.2l1.4-26.1l-1.4-65C-151.1,360.8-152.6,359.3-154.4,359.3z" />
+              <path
+                d="M-197.1,368.9c-1.3,0-2.3,1-2.4,2.4l-1.8,56.3l1.8,26.9c0,1.3,1.1,2.3,2.4,2.3s2.3-1,2.4-2.4l2-26.9l-2-56.3C-194.7,370-195.8,368.9-197.1,368.9z" />
+              <path
+                d="M-46.5,394c-4.3,0-8.4,0.9-12.2,2.4C-61.2,368-85,345.8-114,345.8c-7.1,0-14,1.4-20.1,3.8c-2.4,0.9-3,1.9-3,3.7v99.9c0,1.9,1.5,3.5,3.4,3.7c0.1,0,86.7,0,87.3,0c17.4,0,31.5-14.1,31.5-31.5C-15,408.1-29.1,394-46.5,394z" />
+              <path
+                d="M-143.6,353.2c-1.9,0-3.4,1.6-3.5,3.5l-1.4,70.9l1.4,25.7c0,1.9,1.6,3.4,3.5,3.4c1.9,0,3.4-1.6,3.5-3.5l1.5-25.8l-1.5-70.9C-140.2,354.8-141.7,353.2-143.6,353.2z" />
+              <path
+                d="M-186.5,366.8c-1.4,0-2.5,1.1-2.6,2.6l-1.6,58.2l1.6,26.7c0,1.4,1.2,2.6,2.6,2.6s2.5-1.1,2.6-2.6l1.8-26.7l-1.8-58.2C-184,367.9-185.1,366.8-186.5,366.8z" />
+              <path
+                d="M-175.9,368.1c-1.5,0-2.8,1.2-2.8,2.8l-1.5,56.7l1.5,26.5c0,1.6,1.3,2.8,2.8,2.8s2.8-1.2,2.8-2.8l1.7-26.5l-1.7-56.7C-173.1,369.3-174.3,368.1-175.9,368.1z" />
+              <path
+                d="M-165.2,369.9c-1.7,0-3,1.3-3,3l-1.4,54.7l1.4,26.3c0,1.7,1.4,3,3,3c1.7,0,3-1.3,3-3l1.5-26.3l-1.5-54.7C-162.2,371.3-163.5,369.9-165.2,369.9z" />
+            </svg>
+          </div>
+          <span
+            class="font-heading uppercase tracking-[0.3em] text-[10px] md:text-xs font-bold text-zinc-400 group-hover:text-[#FF5500] transition-colors duration-300">SoundCloud</span>
+        </a>
+
+        <!-- Spotify -->
+        <a href="https://open.spotify.com/intl-pt/artist/70BgO4a6LVEzYiAgxubE3q?si=7TifTc01QWaH8ghHELGu3g"
+          target="_blank"
+          class="w-16 md:w-28 flex-shrink-0 group flex flex-col items-center gap-2 md:gap-3 transition-transform hover:-translate-y-2 text-center">
+          <div
+            class="w-14 h-14 md:w-16 md:h-16 rounded-full border border-white/10 bg-surface/50 backdrop-blur-md flex items-center justify-center shadow-lg group-hover:border-[currentColor] group-hover:text-green-500 group-hover:shadow-[0_0_30px_rgba(34,197,94,0.4)] transition-all duration-300">
+            <svg
+              class="w-7 h-7 md:w-8 md:h-8 text-zinc-400 group-hover:text-[currentColor] transition-colors duration-300"
+              fill="currentColor" viewBox="0 0 24 24">
+              <path
+                d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.54.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-.96-.12-1.08-.6-.12-.48.12-.96.6-1.08 4.32-1.32 9.72-.66 13.38 1.5.42.24.6.84.301 1.26zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.6.18-1.2.72-1.38 4.2-1.32 11.28-1.02 15.721 1.62.539.3.719 1.02.419 1.56-.239.54-.959.72-1.559.3z" />
+            </svg>
+          </div>
+          <span
+            class="font-heading uppercase tracking-[0.3em] text-[10px] md:text-xs font-bold text-zinc-400 group-hover:text-green-500 transition-colors duration-300">Spotify</span>
+        </a>
+
+        <!-- YouTube -->
+        <a href="https://www.youtube.com/@freenzymusic_" target="_blank"
+          class="w-16 md:w-28 flex-shrink-0 group flex flex-col items-center gap-2 md:gap-3 transition-transform hover:-translate-y-2 text-center">
+          <div
+            class="w-14 h-14 md:w-16 md:h-16 rounded-full border border-white/10 bg-surface/50 backdrop-blur-md flex items-center justify-center shadow-lg group-hover:border-[currentColor] group-hover:text-[#FF0000] group-hover:shadow-[0_0_30px_rgba(255,0,0,0.4)] transition-all duration-300">
+            <svg
+              class="w-7 h-7 md:w-8 md:h-8 text-zinc-400 group-hover:text-[currentColor] transition-colors duration-300"
+              fill="currentColor" viewBox="0 0 24 24">
+              <path
+                d="M21.582,6.186c-0.23-0.86-0.908-1.538-1.768-1.768C18.254,4,12,4,12,4S5.746,4,4.186,4.418 c-0.86,0.23-1.538,0.908-1.768,1.768C2,7.746,2,12,2,12s0,4.254,0.418,5.814c0.23,0.86,0.908,1.538,1.768,1.768 C5.746,20,12,20,12,20s6.254,0,7.814-0.418c0.86-0.23,1.538-0.908,1.768-1.768C22,16.254,22,12,22,12S22,7.746,21.582,6.186z M9.641,15.18V8.82L15.351,12L9.641,15.18z" />
+            </svg>
+          </div>
+          <span
+            class="font-heading uppercase tracking-[0.3em] text-[10px] md:text-xs font-bold text-zinc-400 group-hover:text-[#FF0000] transition-colors duration-300">YouTube</span>
+        </a>
+
+        <!-- Email -->
+        <a href="mailto:freenzymusic@gmail.com"
+          class="w-16 md:w-28 flex-shrink-0 group flex flex-col items-center gap-2 md:gap-3 transition-transform hover:-translate-y-2 text-center">
+          <div
+            class="w-14 h-14 md:w-16 md:h-16 rounded-full border border-white/10 bg-surface/50 backdrop-blur-md flex items-center justify-center shadow-lg group-hover:border-[currentColor] group-hover:text-[#007BFF] group-hover:shadow-[0_0_30px_rgba(0,123,255,0.4)] transition-all duration-300">
+            <svg
+              class="w-7 h-7 md:w-8 md:h-8 text-zinc-400 group-hover:text-[currentColor] transition-colors duration-300"
+              fill="currentColor" viewBox="0 0 24 24">
+              <path
+                d="M20 4H4C2.9 4 2.01 4.9 2.01 6L2 18C2 19.1 2.9 20 4 20H20C21.1 20 22 19.1 22 18V6C22 4.9 21.1 4 20 4ZM20 8L12 13L4 8V6L12 11L20 6V8Z" />
+            </svg>
+          </div>
+          <span
+            class="font-heading uppercase tracking-[0.3em] text-[10px] md:text-xs font-bold text-zinc-400 group-hover:text-[#007BFF] transition-colors duration-300">Email</span>
+        </a>
+      </div>
+    </div>
+
+    <div
+      class="grid grid-cols-1 md:grid-cols-3 gap-6 items-center px-6 md:px-12 py-8 border-t border-white/5 bg-black/40">
+      <div class="flex justify-center md:justify-start order-2 md:order-1 h-full items-center">
+        <span class="text-zinc-500 text-[10px] font-heading tracking-widest uppercase">© 2026 FREENZY</span>
+      </div>
+      <div class="flex justify-center order-1 md:order-2 h-full items-center">
+        <img src="assets/no entry/MADE BY LAO.svg" alt="Made by LAO"
+          class="h-14 md:h-30 opacity-80 brightness-0 invert hover:opacity-100 transition-all duration-300">
+      </div>
+      <div class="flex justify-center md:justify-end order-3 md:order-3 h-full items-center">
+        <span class="text-zinc-500 text-[10px] font-heading tracking-widest uppercase text-center md:text-right">RIGHTS RESERVED</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Translator Boilerplate -->
+  <div id="google_translate_element" style="display:none;"></div>
+  <script type="text/javascript">
+    function googleTranslateElementInit() {
+      new google.translate.TranslateElement({ pageLanguage: 'pt', includedLanguages: 'pt,en,es', autoDisplay: false }, 'google_translate_element');
+    }
+    function translateTo(lang) {
+      var select = document.querySelector('.goog-te-combo');
+      if (select) {
+        select.value = lang;
+        select.dispatchEvent(new Event('change'));
+      }
+    }
+  </script>
+  <script type="text/javascript"
+    src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+  <style>
+    /* Google Translate fix to prevent the top banner from breaking layout */
+    body {
+      top: 0 !important;
+    }
+
+    .skiptranslate {
+      display: none !important;
+    }
+
+    .goog-text-highlight {
+      background-color: transparent !important;
+      box-shadow: none !important;
+    }
+
+    font {
+      background-color: transparent !important;
+      box-shadow: none !important;
+    }
+  </style>
+
+  <!-- Minimalist Language Switcher Component -->
+  <div class="fixed bottom-6 right-6 z-50 group" onclick="void(0)">
+    <button
+      class="w-14 h-14 bg-surface backdrop-blur-md border border-white/10 rounded-full flex items-center justify-center text-zinc-400 shadow-2xl hover:border-highlight hover:text-white transition-all relative z-20 cursor-pointer outline-none tap-highlight-transparent"
+      tabindex="0">
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+          d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129">
+        </path>
+      </svg>
+    </button>
+
+    <!-- invisible block to bridge the hover gap -->
+    <div class="absolute bottom-0 right-0 w-14 h-64 z-10 hidden group-hover:block"></div>
+
+    <div
+      class="absolute bottom-16 right-0 w-14 flex flex-col gap-3 opacity-0 group-hover:opacity-100 transition-all origin-bottom pointer-events-none group-hover:pointer-events-auto translate-y-4 group-hover:translate-y-0 z-30 items-center justify-center pb-2 notranslate"
+      translate="no">
+      <button onclick="translateTo('pt')"
+        class="w-10 h-10 bg-primary/95 backdrop-blur border border-white/10 rounded-full text-[10px] uppercase font-bold text-zinc-400 hover:text-white hover:border-highlight hover:bg-highlight flex items-center justify-center transition-colors shadow-lg cursor-pointer outline-none">BR</button>
+      <button onclick="translateTo('en')"
+        class="w-10 h-10 bg-primary/95 backdrop-blur border border-white/10 rounded-full text-[10px] uppercase font-bold text-zinc-400 hover:text-white hover:border-highlight hover:bg-highlight flex items-center justify-center transition-colors shadow-lg cursor-pointer outline-none">EN</button>
+      <button onclick="translateTo('es')"
+        class="w-10 h-10 bg-primary/95 backdrop-blur border border-white/10 rounded-full text-[10px] uppercase font-bold text-zinc-400 hover:text-white hover:border-highlight hover:bg-highlight flex items-center justify-center transition-colors shadow-lg cursor-pointer outline-none">ES</button>
+    </div>
+  </div>
+
+  <script>
+    // Performance optimization: Pause background videos when not in viewport
+    document.addEventListener("DOMContentLoaded", () => {
+      const videos = document.querySelectorAll("video[autoplay]");
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.play();
+          } else {
+            entry.target.pause();
+          }
+        });
+      }, { threshold: 0.1 });
+
+      videos.forEach(video => observer.observe(video));
+
+      // Scroll Progress Bar logic
+      window.addEventListener('scroll', () => {
+        const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+        const scrollPercent = (window.scrollY / docHeight) * 100;
+        const progressBar = document.getElementById('scroll-progress');
+        if (progressBar) {
+          progressBar.style.width = scrollPercent + '%';
+        }
+      });
+
+      // Auto-Translate Intelligence based on Browser Language
+      setTimeout(() => {
+        let userLang = navigator.language || navigator.userLanguage;
+        userLang = userLang.substring(0, 2);
+        if (userLang === 'en' || userLang === 'es') {
+          translateTo(userLang);
+        }
+      }, 500);
+    });
+  </script>
+</body>
+
+</html>
